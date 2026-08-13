@@ -8,19 +8,7 @@ A functional clone of the AWS Route53 web application.
 ```text
 route53-clone/
 │
-├── AGENTS.md
 ├── README.md
-│
-├── docs/
-│   ├── 01-PROJECT-SPEC.md
-│   ├── 02-ARCHITECTURE.md
-│   ├── 03-DATABASE.md
-│   ├── 04-API-SPEC.md
-│   ├── 05-FRONTEND-SPEC.md
-│   ├── 06-UI-UX-SPEC.md
-│   ├── 07-DEVELOPMENT-PLAN.md
-│   └── screenshots/
-│
 ├── frontend/
 │
 └── backend/

@@ -34,7 +34,7 @@ export const PageContainer: React.FC<PageContainerProps> = ({
               <p className="text-xs text-[#545b64] mt-0.5">{subtitle}</p>
             )}
           </div>
-          {actions && <div className="flex items-center space-x-2.5">{actions}</div>}
+          {actions && <div className="flex items-center gap-2.5 flex-wrap">{actions}</div>}
         </div>
       )}
 

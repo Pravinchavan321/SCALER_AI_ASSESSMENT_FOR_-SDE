@@ -36,8 +36,8 @@ def login(
         httponly=True,
         max_age=settings.ACCESS_TOKEN_EXPIRE_MINUTES * 60,
         expires=settings.ACCESS_TOKEN_EXPIRE_MINUTES * 60,
-        samesite="lax",
-        secure=False,  # Suitable for local development on http://localhost
+        samesite="none",
+        secure=True,  # Required for cross-origin cookies between Vercel and Render
     )
 
     return user
@@ -47,8 +47,8 @@ def logout(response: Response):
     response.delete_cookie(
         key=settings.COOKIE_NAME,
         httponly=True,
-        samesite="lax",
-        secure=False,
+        samesite="none",
+        secure=True,
     )
     return {"message": "Successfully logged out"}
 

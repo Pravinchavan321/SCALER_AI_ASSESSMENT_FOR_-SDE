@@ -6,7 +6,7 @@ import {
   RecordType,
 } from "@/types/dnsRecord";
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
 
 export class ApiError extends Error {
   status: number;
@@ -47,7 +47,7 @@ export async function listDnsRecordsApi(
   params.append("limit", limit.toString());
 
   const res = await fetch(
-    `${API_BASE}/api/hosted-zones/${hostedZoneId}/records?${params.toString()}`,
+    `${API_BASE}/hosted-zones/${hostedZoneId}/records?${params.toString()}`,
     {
       method: "GET",
       headers: { "Content-Type": "application/json" },
@@ -62,7 +62,7 @@ export async function getDnsRecordApi(
   recordId: number
 ): Promise<DNSRecord> {
   const res = await fetch(
-    `${API_BASE}/api/hosted-zones/${hostedZoneId}/records/${recordId}`,
+    `${API_BASE}/hosted-zones/${hostedZoneId}/records/${recordId}`,
     {
       method: "GET",
       headers: { "Content-Type": "application/json" },
@@ -77,7 +77,7 @@ export async function createDnsRecordApi(
   data: DNSRecordCreate
 ): Promise<DNSRecord> {
   const res = await fetch(
-    `${API_BASE}/api/hosted-zones/${hostedZoneId}/records`,
+    `${API_BASE}/hosted-zones/${hostedZoneId}/records`,
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -94,7 +94,7 @@ export async function updateDnsRecordApi(
   data: DNSRecordUpdate
 ): Promise<DNSRecord> {
   const res = await fetch(
-    `${API_BASE}/api/hosted-zones/${hostedZoneId}/records/${recordId}`,
+    `${API_BASE}/hosted-zones/${hostedZoneId}/records/${recordId}`,
     {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
@@ -110,7 +110,7 @@ export async function deleteDnsRecordApi(
   recordId: number
 ): Promise<void> {
   const res = await fetch(
-    `${API_BASE}/api/hosted-zones/${hostedZoneId}/records/${recordId}`,
+    `${API_BASE}/hosted-zones/${hostedZoneId}/records/${recordId}`,
     {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },

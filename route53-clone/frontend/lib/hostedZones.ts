@@ -5,7 +5,7 @@ import {
   HostedZoneListResponse,
 } from "@/types/hostedZone";
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
 
 export class ApiError extends Error {
   status: number;
@@ -42,7 +42,7 @@ export async function listHostedZonesApi(
   params.append("page", page.toString());
   params.append("limit", limit.toString());
 
-  const res = await fetch(`${API_BASE}/api/hosted-zones?${params.toString()}`, {
+  const res = await fetch(`${API_BASE}/hosted-zones?${params.toString()}`, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
     credentials: "include",
@@ -51,7 +51,7 @@ export async function listHostedZonesApi(
 }
 
 export async function getHostedZoneApi(id: number): Promise<HostedZone> {
-  const res = await fetch(`${API_BASE}/api/hosted-zones/${id}`, {
+  const res = await fetch(`${API_BASE}/hosted-zones/${id}`, {
     method: "GET",
     headers: { "Content-Type": "application/json" },
     credentials: "include",
@@ -60,7 +60,7 @@ export async function getHostedZoneApi(id: number): Promise<HostedZone> {
 }
 
 export async function createHostedZoneApi(data: HostedZoneCreate): Promise<HostedZone> {
-  const res = await fetch(`${API_BASE}/api/hosted-zones`, {
+  const res = await fetch(`${API_BASE}/hosted-zones`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     credentials: "include",
@@ -73,7 +73,7 @@ export async function updateHostedZoneApi(
   id: number,
   data: HostedZoneUpdate
 ): Promise<HostedZone> {
-  const res = await fetch(`${API_BASE}/api/hosted-zones/${id}`, {
+  const res = await fetch(`${API_BASE}/hosted-zones/${id}`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     credentials: "include",
@@ -83,7 +83,7 @@ export async function updateHostedZoneApi(
 }
 
 export async function deleteHostedZoneApi(id: number): Promise<void> {
-  const res = await fetch(`${API_BASE}/api/hosted-zones/${id}`, {
+  const res = await fetch(`${API_BASE}/hosted-zones/${id}`, {
     method: "DELETE",
     headers: { "Content-Type": "application/json" },
     credentials: "include",

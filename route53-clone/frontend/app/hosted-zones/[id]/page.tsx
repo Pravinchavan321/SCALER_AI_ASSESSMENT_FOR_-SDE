@@ -5,17 +5,12 @@ import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { useAuth } from "@/hooks/useAuth";
 import { Route53Layout, PageContainer } from "@/components/layout";
-import {
-  Button,
-  Card,
-  Badge,
-  Alert,
-  EmptyState,
-} from "@/components/ui";
+import { Button, Card, Badge, Alert } from "@/components/ui";
 import {
   EditHostedZoneModal,
   DeleteHostedZoneModal,
 } from "@/components/hosted-zones";
+import { DNSRecordsSection } from "@/components/dns-records";
 import { getHostedZoneApi } from "@/lib/hostedZones";
 import { HostedZone } from "@/types/hostedZone";
 
@@ -136,7 +131,7 @@ export default function HostedZoneDetailPage() {
           { label: zone.name },
         ]}
         title={zone.name}
-        subtitle="Hosted zone details and configuration."
+        subtitle="Hosted zone details and resource record sets."
         actions={
           <>
             <Button
@@ -167,7 +162,7 @@ export default function HostedZoneDetailPage() {
           </div>
         )}
 
-        {/* Hosted Zone Summary Card */}
+        {/* Hosted Zone Summary Card Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
           <Card title="Hosted zone overview">
             <div className="space-y-3 text-xs">
@@ -189,7 +184,7 @@ export default function HostedZoneDetailPage() {
               </div>
               <div className="flex justify-between py-1.5 border-b border-[#eaeded]">
                 <span className="text-[#545b64] font-medium">Record count:</span>
-                <span className="font-semibold text-[#161e2d]">{zone.record_count}</span>
+                <span className="font-bold text-[#0972d3]">{zone.record_count}</span>
               </div>
             </div>
           </Card>
@@ -216,17 +211,14 @@ export default function HostedZoneDetailPage() {
           </Card>
         </div>
 
-        {/* DNS Records Placeholder Section (Strict Phase 7 Boundary) */}
-        <Card title="DNS records">
-          <EmptyState
-            title="DNS Records Management"
-            description="DNS Records CRUD will be enabled in the upcoming DNS Records UI phase."
-            actionText="Back to Hosted zones"
-            onAction={() => router.push("/")}
-          />
-        </Card>
+        {/* Live DNS Records Management Section */}
+        <DNSRecordsSection
+          hostedZoneId={zone.id}
+          zoneName={zone.name}
+          onRecordCountChange={fetchZoneDetails}
+        />
 
-        {/* Edit Modal */}
+        {/* Edit Hosted Zone Modal */}
         <EditHostedZoneModal
           isOpen={isEditOpen}
           zone={zone}
@@ -240,7 +232,7 @@ export default function HostedZoneDetailPage() {
           }}
         />
 
-        {/* Delete Modal */}
+        {/* Delete Hosted Zone Modal */}
         <DeleteHostedZoneModal
           isOpen={isDeleteOpen}
           zone={zone}

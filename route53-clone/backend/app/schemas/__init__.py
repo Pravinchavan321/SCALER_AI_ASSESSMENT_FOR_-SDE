@@ -5,6 +5,14 @@ from app.schemas.hosted_zone import (
     HostedZoneResponse,
     HostedZoneListResponse,
 )
+from app.schemas.dns_record import (
+    RecordTypeEnum,
+    SUPPORTED_RECORD_TYPES,
+    DNSRecordCreate,
+    DNSRecordUpdate,
+    DNSRecordResponse,
+    DNSRecordListResponse,
+)
 
 __all__ = [
     "LoginRequest",
@@ -14,4 +22,10 @@ __all__ = [
     "HostedZoneUpdate",
     "HostedZoneResponse",
     "HostedZoneListResponse",
+    "RecordTypeEnum",
+    "SUPPORTED_RECORD_TYPES",
+    "DNSRecordCreate",
+    "DNSRecordUpdate",
+    "DNSRecordResponse",
+    "DNSRecordListResponse",
 ]
